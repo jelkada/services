@@ -1,0 +1,59 @@
+
+<div class="container my-5">
+
+  <div class="row no-gutters">
+    <div class="col-xs-12">
+      <h3>Services and dependency injection (<a href="https://github.com/jelkada/services" target="_blank">see on github</a>)</h3>
+      <ul>
+        <li>This example uses two service classes: usersService and counterService (counterService is also injected into usersService).</li>
+        <li>The services share some common functionality for cross component communication.</li>
+        <li>The usersService updates the activeUsers and inactiveUsers[] arrays and refresh the list of users accordingly.</li>
+        <li>The counterService counts the total number of status changes and this.counterService.onIncrement() is invoked from few components.</li>
+        <li>The users components have an “statusChanged” EventEmitter which is emitted each time user status is updated.</li>
+        <li>The app components listens to the (statusChanged)="onStatusChanged() event and updates the counter via string interpolation.</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class=""/>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-4 mt-3">
+      <app-active-users  (statusChanged)="onStatusChanged()"></app-active-users>
+    </div>
+    <div class="col-xs-12 col-md-4  mt-3">
+      <app-inactive-users (statusChanged)="onStatusChanged()"></app-inactive-users>
+    </div>
+    <div class="col-xs-12 col-md-4 mt-3">
+      <h4>Number of changes: </h4>
+      <ul class="list-group">
+        <li class="list-group-item">{{ counter }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="mt-5"/>
+
+  <div class="row no-gutters">
+    <div class="col-xs-12 ng-non-bindable">
+      <h4 class="mt-3">Services highlights:</h4>
+      <ul>
+        <li>Angular Services centralize common tasks and communicate between component (passing data around)</li>
+        <li>Services provide application data and business logic to components.</li>
+        <li>Services are objects that are wired together using dependency injection (DI).</li>
+        <li>You can inject/use a service in components, giving the components access to that Service functions.</li>
+        <li>The component then has a dependency on the service, which is registered via the component’s provider array.</li>
+      </ul>
+      <h4 class="mt-3">Usage guidelines:</h4>
+      <ul>
+        <li>Create a simple class that will be used as a Service, such as "UsersService" (in users.service.ts)</li>
+        <li>Set up the data and common functions that the Service provides</li>
+        <li>Use the @Injectable() decorator to indicate if the Service includes other services or dependencies</li>
+        <li>Import the Service in your module component.<br/>Ex: import &#123; UsersService &#125; from './users.service';</li>
+        <li>Add the Service to the providers array in your module or component.<br/>Ex: providers: [UsersService]</li>
+        <li>Include the Service in the component or service constructor, where the service is used.<br/>Ex: constructor(private usersService: UsersService) &#123;&#125;</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
